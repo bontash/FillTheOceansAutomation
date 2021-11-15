@@ -79,11 +79,7 @@
       <Variable x:TypeArguments="x:Int32" Name="nrOfDecimals" />
       <Variable x:TypeArguments="x:String" Name="extractedProduction" />
       <Variable x:TypeArguments="x:String" Name="extractedCost" />
-      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Double)" Name="numbersOrderDictionary">
-        <Variable.Default>
-          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Double)" ExpressionText="new Dictionary(of String,Double)" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Double)" Default="[new Dictionary(of String,Double)]" Name="numbersOrderDictionary" />
       <Variable x:TypeArguments="x:String" Name="numberOrder" />
       <Variable x:TypeArguments="x:Double" Name="cost" />
       <Variable x:TypeArguments="x:Double" Name="idk" />
@@ -229,7 +225,7 @@
                   <OutArgument x:TypeArguments="x:String">[numberOrder]</OutArgument>
                 </ui:AssignOperation.To>
                 <ui:AssignOperation.Value>
-                  <InArgument x:TypeArguments="x:String">[Split(in_ExtractedProduction,"produces ").Last.ToString.Split(" "c)(1)]</InArgument>
+                  <InArgument x:TypeArguments="x:String">[Split(in_ExtractedProduction,"produces ").Last.ToString.Split(" "c)(2)]</InArgument>
                 </ui:AssignOperation.Value>
               </ui:AssignOperation>
               <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">

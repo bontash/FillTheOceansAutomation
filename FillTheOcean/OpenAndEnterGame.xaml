@@ -120,7 +120,7 @@
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <PickBranch sap:VirtualizedContainerService.HintSize="383.2,463.2" sap2010:WorkflowViewState.IdRef="PickBranch_3">
+      <PickBranch DisplayName="PickBranch - first time" sap:VirtualizedContainerService.HintSize="383.2,463.2" sap2010:WorkflowViewState.IdRef="PickBranch_3">
         <PickBranch.Trigger>
           <ui:WaitImageAppear FoundElement="{x:Null}" DisplayName="Find Image - Start button" sap:VirtualizedContainerService.HintSize="333.6,107.2" sap2010:WorkflowViewState.IdRef="WaitImageAppear_2">
             <ui:WaitImageAppear.Image>
@@ -158,7 +158,7 @@
           </ui:ClickImage.Target>
         </ui:ClickImage>
       </PickBranch>
-      <PickBranch sap:VirtualizedContainerService.HintSize="424.8,463.2" sap2010:WorkflowViewState.IdRef="PickBranch_4">
+      <PickBranch DisplayName="PickBranch - game already played" sap:VirtualizedContainerService.HintSize="424.8,463.2" sap2010:WorkflowViewState.IdRef="PickBranch_4">
         <PickBranch.Trigger>
           <Sequence sap:VirtualizedContainerService.HintSize="375.2,200" sap2010:WorkflowViewState.IdRef="Sequence_29">
             <sap:WorkflowViewStateService.ViewState>
