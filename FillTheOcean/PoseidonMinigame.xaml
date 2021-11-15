@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="PoseidonMinigame" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1123.2,1812" sap2010:WorkflowViewState.IdRef="PoseidonMinigame_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="PoseidonMinigame" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1123.2,1959.2" sap2010:WorkflowViewState.IdRef="PoseidonMinigame_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="28">
       <x:String>System.Activities</x:String>
@@ -56,7 +56,7 @@
       <AssemblyReference>System.Memory</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="PoseidonMinigame" sap:VirtualizedContainerService.HintSize="1133.6,1747.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="PoseidonMinigame" sap:VirtualizedContainerService.HintSize="1133.6,1894.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="currentFoodSupply" />
       <Variable x:TypeArguments="x:String" Name="maximumFoodCapacity" />
@@ -71,13 +71,13 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser Game" sap:VirtualizedContainerService.HintSize="1092,1654.4" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="edf4db813f7dc2c473b48bacf4024138" Selector="&lt;html app='chrome.exe' url='*filltheoceans*/' /&gt;">
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser Game" sap:VirtualizedContainerService.HintSize="1092,1801.6" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="edf4db813f7dc2c473b48bacf4024138" Selector="&lt;html app='chrome.exe' url='*filltheoceans*/' /&gt;">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1058.4,1507.2" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1058.4,1654.4" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:Boolean" Name="poseidonExists" />
             </Sequence.Variables>
@@ -91,9 +91,9 @@
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="fc5aea8f-c9c2-4817-86b8-ac0cf207eee6" InformativeScreenshot="fbf66b66978599e0a9964a0ff66bfbe9" Selector="&lt;webctrl id='poseidonImage' tag='DIV' /&gt;" TimeoutMS="1000" WaitForReady="COMPLETE" />
               </ui:UiElementExists.Target>
             </ui:UiElementExists>
-            <If Condition="[poseidonExists]" DisplayName="If Poseidon exists, open minigame" sap:VirtualizedContainerService.HintSize="1016.8,1267.2" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[poseidonExists]" DisplayName="If Poseidon exists, open minigame" sap:VirtualizedContainerService.HintSize="1016.8,1414.4" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="981.6,1088" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                <Sequence sap:VirtualizedContainerService.HintSize="981.6,1235.2" sap2010:WorkflowViewState.IdRef="Sequence_10">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -180,7 +180,7 @@
                       </ui:Target>
                     </ui:WaitUiElementAppear.Target>
                   </ui:WaitUiElementAppear>
-                  <ui:InterruptibleDoWhile DisplayName="Do While Food did not reach maximum capacity" sap:VirtualizedContainerService.HintSize="940,52.8" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+                  <ui:InterruptibleDoWhile Condition="[currentFoodSupply &lt;&gt; maximumFoodCapacity]" DisplayName="Do While Food did not reach maximum capacity" sap:VirtualizedContainerService.HintSize="940,52.8" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
                     <ui:InterruptibleDoWhile.Body>
                       <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="766.4,687.2" sap2010:WorkflowViewState.IdRef="Sequence_5">
                         <Sequence.Variables>
@@ -264,9 +264,6 @@
                         </ui:Click>
                       </Sequence>
                     </ui:InterruptibleDoWhile.Body>
-                    <ui:InterruptibleDoWhile.Condition>
-                      <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="currentFoodSupply &lt;&gt; maximumFoodCapacity" />
-                    </ui:InterruptibleDoWhile.Condition>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -274,7 +271,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:InterruptibleDoWhile>
-                  <ui:InterruptibleDoWhile DisplayName="Do While wood quantity did not reach maximum capacity" sap:VirtualizedContainerService.HintSize="940,52.8" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
+                  <ui:InterruptibleDoWhile Condition="[currentWoodSupply&lt;&gt;maximumWoodCapacity]" DisplayName="Do While wood quantity did not reach maximum capacity" sap:VirtualizedContainerService.HintSize="940,52.8" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
                     <ui:InterruptibleDoWhile.Body>
                       <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="766.4,687.2" sap2010:WorkflowViewState.IdRef="Sequence_8">
                         <sap:WorkflowViewStateService.ViewState>
@@ -355,9 +352,6 @@
                         </ui:Click>
                       </Sequence>
                     </ui:InterruptibleDoWhile.Body>
-                    <ui:InterruptibleDoWhile.Condition>
-                      <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="currentWoodSupply&lt;&gt;maximumWoodCapacity" />
-                    </ui:InterruptibleDoWhile.Condition>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -365,7 +359,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:InterruptibleDoWhile>
-                  <ui:InterruptibleDoWhile DisplayName="Do While Stone Quantity did not reach maximum capacity" sap:VirtualizedContainerService.HintSize="940,52.8" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_3">
+                  <ui:InterruptibleDoWhile Condition="[maximumStoneCapacity&lt;&gt;currentStoneSupply]" DisplayName="Do While Stone Quantity did not reach maximum capacity" sap:VirtualizedContainerService.HintSize="940,52.8" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_3">
                     <ui:InterruptibleDoWhile.Body>
                       <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="766.4,687.2" sap2010:WorkflowViewState.IdRef="Sequence_9">
                         <Sequence.Variables>
@@ -449,9 +443,6 @@
                         </ui:Click>
                       </Sequence>
                     </ui:InterruptibleDoWhile.Body>
-                    <ui:InterruptibleDoWhile.Condition>
-                      <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="maximumStoneCapacity&lt;&gt;currentStoneSupply" />
-                    </ui:InterruptibleDoWhile.Condition>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -459,6 +450,28 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:InterruptibleDoWhile>
+                  <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click Back to game button" sap:VirtualizedContainerService.HintSize="940,107.2" sap2010:WorkflowViewState.IdRef="Click_8" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                    <ui:Click.CursorPosition>
+                      <ui:CursorPosition Position="Center">
+                        <ui:CursorPosition.OffsetX>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetX>
+                        <ui:CursorPosition.OffsetY>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:CursorPosition.OffsetY>
+                      </ui:CursorPosition>
+                    </ui:Click.CursorPosition>
+                    <ui:Click.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="94071f2e-f4f2-41cd-84d0-e6411f3289c0" InformativeScreenshot="719e5f1a010d6a8d0627be5330698149" Selector="&lt;webctrl id='poseidonBacktogameButton' tag='BUTTON' /&gt;">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </ui:Click.Target>
+                  </ui:Click>
                 </Sequence>
               </If.Then>
               <If.Else>
