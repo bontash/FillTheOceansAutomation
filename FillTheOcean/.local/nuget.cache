@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "hoFjH+sjBH7H1BMq4tr33AW5kLAJ2JZF6xTA3Hi6sruXdvdbPyq9KM4Pd/7EAjAFunm6rOw3n4xau+rBq3qmwg==",
+  "dgSpecHash": "yYXV0ua7yptHKJxkwKKroIPtJX0MbPyzljV/q6Zb3KzbhEFiDHSFqATcEe9/f5+m4hccxkC+PI7nBC6DR0ztjQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Lorena\\Desktop\\profesional stuff\\Automatify\\FillTheOcean\\.local\\",
+  "projectFilePath": "C:\\Users\\Lorena\\Desktop\\profesional stuff\\personal projects\\FillTheOceansAutomation\\FillTheOcean\\.local\\",
   "expectedPackageFiles": [
     "C:\\Users\\Lorena\\.nuget\\packages\\closedxml\\0.87.1\\closedxml.0.87.1.nupkg.sha512",
     "C:\\Users\\Lorena\\.nuget\\packages\\csvhelper\\16.0.0\\csvhelper.16.0.0.nupkg.sha512",

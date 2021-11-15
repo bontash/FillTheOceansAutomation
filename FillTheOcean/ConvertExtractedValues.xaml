@@ -1,17 +1,17 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="ConvertExtractedValues" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="out_Production" Type="OutArgument(x:String)" />
-    <x:Property Name="out_Cost" Type="OutArgument(x:String)" />
+    <x:Property Name="out_Production" Type="OutArgument(x:Double)" />
+    <x:Property Name="out_Cost" Type="OutArgument(x:Double)" />
     <x:Property Name="in_ExtractedCost" Type="InArgument(x:String)" />
     <x:Property Name="in_ExtractedProduction" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>824,3363.2</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>824,1476</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ConvertExtractedValues_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="27">
+    <scg:List x:TypeArguments="x:String" Capacity="54">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -39,10 +39,11 @@
       <x:String>System.Reflection</x:String>
       <x:String>System.Runtime.InteropServices</x:String>
       <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="25">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="48">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -67,249 +68,181 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ConvertExtractedValues" sap:VirtualizedContainerService.HintSize="615.2,3298.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ConvertExtractedValues" sap:VirtualizedContainerService.HintSize="524.8,1411.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int32" Name="nrOfDecimals" />
       <Variable x:TypeArguments="x:String" Name="extractedProduction" />
       <Variable x:TypeArguments="x:String" Name="extractedCost" />
-      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="numbersOrderDictionary">
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:Double)" Name="numbersOrderDictionary">
         <Variable.Default>
-          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="new Dictionary(of String,String)" />
+          <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Double)" ExpressionText="new Dictionary(of String,Double)" />
         </Variable.Default>
       </Variable>
-      <Variable x:TypeArguments="x:String" Name="order" />
-      <Variable x:TypeArguments="x:String" Name="cost" />
+      <Variable x:TypeArguments="x:String" Name="numberOrder" />
+      <Variable x:TypeArguments="x:Double" Name="cost" />
+      <Variable x:TypeArguments="x:Double" Name="idk" />
+      <Variable x:TypeArguments="x:Double" Name="idk2" />
+      <Variable x:TypeArguments="x:Double" Name="production" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="573.6,62.4" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[if(&quot;123 million&quot; &gt; &quot;123 billion&quot;,&quot;123 million&quot;,&quot;123 billion&quot;)]" />
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="573.6,256.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+    <ui:MultipleAssign DisplayName="Multiple Assign - add values to numbersOrderDictionary" sap:VirtualizedContainerService.HintSize="483.2,444" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
       <ui:MultipleAssign.AssignOperations>
-        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="16">
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
             <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[numbersOrderDictionary("million")]</OutArgument>
+              <OutArgument x:TypeArguments="x:Double">[numbersOrderDictionary("million")]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">1000000</InArgument>
+              <InArgument x:TypeArguments="x:Double">1000000</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
             <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[numbersOrderDictionary("billion")]</OutArgument>
+              <OutArgument x:TypeArguments="x:Double">[numbersOrderDictionary("billion")]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">1000000000</InArgument>
+              <InArgument x:TypeArguments="x:Double">1000000000</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
             <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[numbersOrderDictionary("trillion")]</OutArgument>
+              <OutArgument x:TypeArguments="x:Double">[numbersOrderDictionary("trillion")]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">1000000000000</InArgument>
+              <InArgument x:TypeArguments="x:Double">1000000000000</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
             <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[numbersOrderDictionary("quadrillion")]</OutArgument>
+              <OutArgument x:TypeArguments="x:Double">[numbersOrderDictionary("quadrillion")]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">1000000000000000</InArgument>
+              <InArgument x:TypeArguments="x:Double">1E+15</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
             <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[numbersOrderDictionary("quintillion")]</OutArgument>
+              <OutArgument x:TypeArguments="x:Double">[numbersOrderDictionary("quintillion")]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">1000000000000000000</InArgument>
+              <InArgument x:TypeArguments="x:Double">1E+18</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
           <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
             <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[numbersOrderDictionary("sextillion")]</OutArgument>
+              <OutArgument x:TypeArguments="x:Double">[numbersOrderDictionary("sextillion")]</OutArgument>
             </ui:AssignOperation.To>
             <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">1000000000000000000000</InArgument>
+              <InArgument x:TypeArguments="x:Double">1E+21</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Double">[numbersOrderDictionary("septillion")]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Double">1E+24</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Double">[numbersOrderDictionary("octillion")]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Double">1E+27</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Double">[numbersOrderDictionary("nonillion")]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Double">1E+30</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_15">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Double">[numbersOrderDictionary("decillion")]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Double">1E+33</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Double">[numbersOrderDictionary("undecillion")]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Double">1E+36</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Double">[numbersOrderDictionary("duodecillion")]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Double">1E+39</InArgument>
             </ui:AssignOperation.Value>
           </ui:AssignOperation>
         </scg:List>
       </ui:MultipleAssign.AssignOperations>
     </ui:MultipleAssign>
-    <If Condition="[not Split(extractedProduction,&quot;produces&quot;).Last.ToString.Split(&quot; &quot;c)(1).equals(&quot;drops&quot;)]" sap:VirtualizedContainerService.HintSize="573.6,1335.2" sap2010:WorkflowViewState.IdRef="If_2">
+    <ui:MultipleAssign DisplayName="Multiple Assign - get production and cost from strings" sap:VirtualizedContainerService.HintSize="483.2,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_3">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Double">[out_Production]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Double">[CType(Split(in_ExtractedProduction,"produces ").Last.ToString.Split(" "c).First,Double)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:Double">[out_Cost]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:Double">[CType(in_ExtractedCost.Split(" "c)(1),Double)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
+    <If Condition="[not Split(in_ExtractedProduction,&quot;produces &quot;).Last.ToString.Split(&quot; &quot;c)(1).equals(&quot;drops&quot;)]" DisplayName="If there exists a number order for production, extract it" sap:VirtualizedContainerService.HintSize="483.2,311.2" sap2010:WorkflowViewState.IdRef="If_2">
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="538.4,1156" sap2010:WorkflowViewState.IdRef="Sequence_5">
-          <Sequence.Variables>
-            <Variable x:TypeArguments="x:String" Name="production" />
-          </Sequence.Variables>
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="496.8,164" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
-            <ui:MultipleAssign.AssignOperations>
-              <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
-                  <ui:AssignOperation.To>
-                    <OutArgument x:TypeArguments="x:String">[order]</OutArgument>
-                  </ui:AssignOperation.To>
-                  <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="x:String">[Split(in_ExtractedProduction,"produces").Last.ToString.Split(" "c)(1)]</InArgument>
-                  </ui:AssignOperation.Value>
-                </ui:AssignOperation>
-                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
-                  <ui:AssignOperation.To>
-                    <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-                  </ui:AssignOperation.To>
-                  <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="x:String">[Split(in_ExtractedProduction,"produces").Last.ToString.Split(" "c).First]</InArgument>
-                  </ui:AssignOperation.Value>
-                </ui:AssignOperation>
-                <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
-                  <ui:AssignOperation.To>
-                    <OutArgument x:TypeArguments="x:Int32">[nrOfDecimals]</OutArgument>
-                  </ui:AssignOperation.To>
-                  <ui:AssignOperation.Value>
-                    <InArgument x:TypeArguments="x:Int32">[out_Production.Split("."c).Last.ToString.Length]</InArgument>
-                  </ui:AssignOperation.Value>
-                </ui:AssignOperation>
-              </scg:List>
-            </ui:MultipleAssign.AssignOperations>
-          </ui:MultipleAssign>
-          <Switch x:TypeArguments="x:Int32" DisplayName="Switch" Expression="[nrOfDecimals]" sap:VirtualizedContainerService.HintSize="496.8,316.8" sap2010:WorkflowViewState.IdRef="Switch`1_3">
-            <Assign x:Key="1" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_19">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"00000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="2" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_20">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"0000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="3" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_21">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="0" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_22">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-          </Switch>
-          <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[order]" sap:VirtualizedContainerService.HintSize="496.8,502.4" sap2010:WorkflowViewState.IdRef="Switch`1_4">
-            <x:Null x:Key="million" />
-            <Assign x:Key="billion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_23">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="trillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_24">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="quadrillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_25">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="quintillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_26">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="sextillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_27">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="septillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_28">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"000000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="octillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_29">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"000000000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="nonillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_30">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"000000000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="decillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_31">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"000000000000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="undecillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_32">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"000000000000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="duodecillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_33">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Production]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Production+"000000000000000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-          </Switch>
-        </Sequence>
+        <ui:MultipleAssign DisplayName="Get nr order and create production" sap:VirtualizedContainerService.HintSize="430.4,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+          <ui:MultipleAssign.AssignOperations>
+            <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_18">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="x:String">[numberOrder]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="x:String">[Split(in_ExtractedProduction,"produces ").Last.ToString.Split(" "c)(1)]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="x:Double">[out_Production]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="x:Double">[out_Production*numbersOrderDictionary(numberOrder)]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+            </scg:List>
+          </ui:MultipleAssign.AssignOperations>
+        </ui:MultipleAssign>
       </If.Then>
       <If.Else>
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_6">
@@ -321,7 +254,7 @@
         </Sequence>
       </If.Else>
     </If>
-    <If Condition="[not extractedCost.Split(&quot; &quot;c)(2).Equals(&quot;drops&quot;)]" sap:VirtualizedContainerService.HintSize="573.6,1431.2" sap2010:WorkflowViewState.IdRef="If_1">
+    <If Condition="[not in_ExtractedCost.Split(&quot; &quot;c)(2).Equals(&quot;drops&quot;)]" DisplayName="If there exists a number order for cost, extract it" sap:VirtualizedContainerService.HintSize="483.2,311.2" sap2010:WorkflowViewState.IdRef="If_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -329,162 +262,28 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <If.Then>
-        <Sequence sap:VirtualizedContainerService.HintSize="538.4,1252" sap2010:WorkflowViewState.IdRef="Sequence_3">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <Assign sap:VirtualizedContainerService.HintSize="496.8,60" sap2010:WorkflowViewState.IdRef="Assign_3">
-            <Assign.To>
-              <OutArgument x:TypeArguments="x:String">[order]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[in_ExtractedCost.Split(" "c)(2)]</InArgument>
-            </Assign.Value>
-          </Assign>
-          <Assign sap:VirtualizedContainerService.HintSize="496.8,60" sap2010:WorkflowViewState.IdRef="Assign_2">
-            <Assign.To>
-              <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="x:String">[in_ExtractedCost.Split(" "c)(1)]</InArgument>
-            </Assign.Value>
-          </Assign>
-          <Assign sap:VirtualizedContainerService.HintSize="496.8,60" sap2010:WorkflowViewState.IdRef="Assign_1">
-            <Assign.To>
-              <OutArgument x:TypeArguments="x:Int32">[nrOfDecimals]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="x:Int32">[out_Cost.Split("."c).Last.ToString.length]</InArgument>
-            </Assign.Value>
-          </Assign>
-          <Switch x:TypeArguments="x:Int32" DisplayName="Switch" Expression="[nrOfDecimals]" sap:VirtualizedContainerService.HintSize="496.8,316.8" sap2010:WorkflowViewState.IdRef="Switch`1_1">
-            <Assign x:Key="1" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_4">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"00000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="2" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_5">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"0000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="3" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_6">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="0" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_7">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-          </Switch>
-          <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[order]" sap:VirtualizedContainerService.HintSize="496.8,502.4" sap2010:WorkflowViewState.IdRef="Switch`1_2">
-            <x:Null x:Key="million" />
-            <Assign x:Key="billion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_8">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="trillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_9">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="quadrillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_10">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="quintillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_11">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="sextillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_12">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="septillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_13">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"000000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="octillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_14">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"000000000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="nonillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_15">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"000000000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="decillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_16">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"000000000000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="undecillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_17">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"000000000000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign x:Key="duodecillion" sap:VirtualizedContainerService.HintSize="262.4,60" sap2010:WorkflowViewState.IdRef="Assign_18">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[out_Cost]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[out_Cost+"000000000000000000000000000"]</InArgument>
-              </Assign.Value>
-            </Assign>
-          </Switch>
-        </Sequence>
+        <ui:MultipleAssign DisplayName="Get nr order and create cost" sap:VirtualizedContainerService.HintSize="430.4,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_5">
+          <ui:MultipleAssign.AssignOperations>
+            <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_20">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="x:String">[numberOrder]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="x:String">[in_ExtractedCost.Split(" "c)(3)]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+              <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_21">
+                <ui:AssignOperation.To>
+                  <OutArgument x:TypeArguments="x:Double">[out_Cost]</OutArgument>
+                </ui:AssignOperation.To>
+                <ui:AssignOperation.Value>
+                  <InArgument x:TypeArguments="x:Double">[out_Cost*numbersOrderDictionary(numberOrder)]</InArgument>
+                </ui:AssignOperation.Value>
+              </ui:AssignOperation>
+            </scg:List>
+          </ui:MultipleAssign.AssignOperations>
+        </ui:MultipleAssign>
       </If.Then>
       <If.Else>
         <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4">
