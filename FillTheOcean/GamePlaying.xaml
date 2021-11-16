@@ -119,7 +119,7 @@
                     </ui:InvokeWorkflowFile.Arguments>
                   </ui:InvokeWorkflowFile>
                   <Parallel DisplayName="In Parallel, click the drop and process the rest of the game" sap:VirtualizedContainerService.HintSize="1108.8,1398.4" sap2010:WorkflowViewState.IdRef="Parallel_1">
-                    <ui:InterruptibleDoWhile DisplayName="Do While Game not over" sap:VirtualizedContainerService.HintSize="410.4,1352" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_3">
+                    <ui:InterruptibleDoWhile Condition="[CType(oceansPercentage,Double) &lt;&gt; 100.000000000000000]" DisplayName="Do While Game not over" sap:VirtualizedContainerService.HintSize="410.4,1352" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_3">
                       <ui:InterruptibleDoWhile.Body>
                         <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="375.2,200" sap2010:WorkflowViewState.IdRef="Sequence_8">
                           <sap:WorkflowViewStateService.ViewState>
@@ -148,9 +148,6 @@
                           </ui:Click>
                         </Sequence>
                       </ui:InterruptibleDoWhile.Body>
-                      <ui:InterruptibleDoWhile.Condition>
-                        <mva:VisualBasicValue x:TypeArguments="x:Boolean" ExpressionText="CType(oceansPercentage,Double) &lt;&gt; 100.000000000000000" />
-                      </ui:InterruptibleDoWhile.Condition>
                     </ui:InterruptibleDoWhile>
                     <Sequence sap:VirtualizedContainerService.HintSize="524.8,1352" sap2010:WorkflowViewState.IdRef="Sequence_7">
                       <sap:WorkflowViewStateService.ViewState>
@@ -168,7 +165,7 @@
                           <scg:Dictionary x:TypeArguments="x:String, Argument" />
                         </ui:InvokeWorkflowFile.Arguments>
                       </ui:InvokeWorkflowFile>
-                      <If Condition="[now.Minute mod 5 = 0]" DisplayName="Every 5 minutes, check if Poseidon Minigame is available" sap:VirtualizedContainerService.HintSize="483.2,385.6" sap2010:WorkflowViewState.IdRef="If_1">
+                      <If Condition="[now.Minute mod 120 = 0]" DisplayName="Every 2 hours, check if Poseidon Minigame is available" sap:VirtualizedContainerService.HintSize="483.2,385.6" sap2010:WorkflowViewState.IdRef="If_1">
                         <If.Then>
                           <Sequence sap:VirtualizedContainerService.HintSize="375.2,206.4" sap2010:WorkflowViewState.IdRef="Sequence_5">
                             <sap:WorkflowViewStateService.ViewState>
@@ -193,7 +190,7 @@
                           </Sequence>
                         </If.Else>
                       </If>
-                      <If Condition="[now.Minute mod 30 = 0]" DisplayName="Every 30 minutes, fill the ocean with 50% of drops" sap:VirtualizedContainerService.HintSize="483.2,526.4" sap2010:WorkflowViewState.IdRef="If_2">
+                      <If Condition="[now.Minute mod 180 = 0]" DisplayName="Every 3 hours, fill the ocean with 50% of drops" sap:VirtualizedContainerService.HintSize="483.2,526.4" sap2010:WorkflowViewState.IdRef="If_2">
                         <If.Then>
                           <Sequence sap:VirtualizedContainerService.HintSize="375.2,347.2" sap2010:WorkflowViewState.IdRef="Sequence_9">
                             <sap:WorkflowViewStateService.ViewState>

@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="HelpersProcessing" sap:VirtualizedContainerService.HintSize="824,2196.8" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="HelpersProcessing" sap:VirtualizedContainerService.HintSize="824,2538.4" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
       <x:String>System.Activities</x:String>
@@ -57,27 +57,28 @@
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>System.ServiceModel.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Helpers Processing Sequence" sap:VirtualizedContainerService.HintSize="753.6,2132" sap2010:WorkflowViewState.IdRef="Sequence_27">
+  <Sequence DisplayName="Helpers Processing Sequence" sap:VirtualizedContainerService.HintSize="777.6,2473.6" sap2010:WorkflowViewState.IdRef="Sequence_27">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser Game" sap:VirtualizedContainerService.HintSize="712,2039.2" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="44c51c41ba50cecc768c2aaa04e2b48f" Selector="&lt;html app='chrome.exe' url='*filltheoceans.com*' /&gt;">
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser Game" sap:VirtualizedContainerService.HintSize="736,2380.8" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="44c51c41ba50cecc768c2aaa04e2b48f" Selector="&lt;html app='chrome.exe' url='*filltheoceans.com*' /&gt;">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="678.4,1892" sap2010:WorkflowViewState.IdRef="Sequence_28">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="702.4,2233.6" sap2010:WorkflowViewState.IdRef="Sequence_28">
             <Sequence.Variables>
               <Variable x:TypeArguments="scg:IEnumerable(ui:UiElement)" Name="helpersChildren" />
               <Variable x:TypeArguments="x:String" Name="optimumRateHelperName" />
               <Variable x:TypeArguments="x:Double" Name="optimumRate">
                 <Variable.Default>
-                  <Literal x:TypeArguments="x:Double" Value="-1" />
+                  <Literal x:TypeArguments="x:Double" Value="1E+50" />
                 </Variable.Default>
               </Variable>
             </Sequence.Variables>
@@ -86,7 +87,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:FindChildren Children="[helpersChildren]" DisplayName="Find Children - Helpers container" Filter="&lt;webctrl tag='button' class='building buildingactive'/&gt;" sap:VirtualizedContainerService.HintSize="636.8,107.2" sap2010:WorkflowViewState.IdRef="FindChildren_3" Scope="FIND_DESCENDANTS">
+            <ui:FindChildren Children="[helpersChildren]" DisplayName="Find Children - Helpers container" Filter="&lt;webctrl tag='button' class='building buildingactive'/&gt;" sap:VirtualizedContainerService.HintSize="660.8,107.2" sap2010:WorkflowViewState.IdRef="FindChildren_3" Scope="FIND_DESCENDANTS">
               <ui:FindChildren.Target>
                 <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="76aee832-742e-4752-8438-6b1c1c393eaf" InformativeScreenshot="745d518a2ced820e19013c52bb4eec51" Selector="&lt;webctrl id='store-container' tag='DIV' /&gt;" WaitForReady="COMPLETE">
                   <ui:Target.TimeoutMS>
@@ -95,21 +96,21 @@
                 </ui:Target>
               </ui:FindChildren.Target>
             </ui:FindChildren>
-            <If Condition="[helpersChildren isNot nothing]" DisplayName="Set flag helpers exist" sap:VirtualizedContainerService.HintSize="636.8,1652" sap2010:WorkflowViewState.IdRef="If_5">
+            <If Condition="[helpersChildren isNot nothing]" DisplayName="Set flag helpers exist" sap:VirtualizedContainerService.HintSize="660.8,1993.6" sap2010:WorkflowViewState.IdRef="If_5">
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="601.6,1472.8" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                <Sequence sap:VirtualizedContainerService.HintSize="625.6,1814.4" sap2010:WorkflowViewState.IdRef="Sequence_31">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:ForEach x:TypeArguments="ui:UiElement" CurrentIndex="{x:Null}" DisplayName="For Each Helper" sap:VirtualizedContainerService.HintSize="560,1232.8" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[helpersChildren]">
+                  <ui:ForEach x:TypeArguments="ui:UiElement" CurrentIndex="{x:Null}" DisplayName="For Each Helper" sap:VirtualizedContainerService.HintSize="584,1574.4" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[helpersChildren]">
                     <ui:ForEach.Body>
                       <ActivityAction x:TypeArguments="ui:UiElement">
                         <ActivityAction.Argument>
                           <DelegateInArgument x:TypeArguments="ui:UiElement" Name="child" />
                         </ActivityAction.Argument>
-                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="524.8,1108" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="548.8,1449.6" sap2010:WorkflowViewState.IdRef="Sequence_13">
                           <Sequence.Variables>
                             <Variable x:TypeArguments="x:Double" Name="cost" />
                             <Variable x:TypeArguments="x:Double" Name="production" />
@@ -125,7 +126,7 @@
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <ui:Hover DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" DisplayName="Hover over helper" sap:VirtualizedContainerService.HintSize="483.2,68.8" sap2010:WorkflowViewState.IdRef="Hover_2" SimulateHover="True">
+                          <ui:Hover DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" DisplayName="Hover over helper" sap:VirtualizedContainerService.HintSize="507.2,68.8" sap2010:WorkflowViewState.IdRef="Hover_2" SimulateHover="True">
                             <ui:Hover.CursorPosition>
                               <ui:CursorPosition Position="Center">
                                 <ui:CursorPosition.OffsetX>
@@ -144,7 +145,7 @@
                               </ui:Target>
                             </ui:Hover.Target>
                           </ui:Hover>
-                          <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text - helper's name" sap:VirtualizedContainerService.HintSize="483.2,107.2" sap2010:WorkflowViewState.IdRef="GetValue_6">
+                          <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text - helper's name" sap:VirtualizedContainerService.HintSize="507.2,107.2" sap2010:WorkflowViewState.IdRef="GetValue_6">
                             <ui:GetValue.Target>
                               <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="32a534e1-7a63-4311-b454-9df65a1dcc42" InformativeScreenshot="7ac89c1a4e00a17d5ed58c347e9265df" Selector="&lt;webctrl parentid='popover' tag='P' class='popovertitle' /&gt;" WaitForReady="COMPLETE">
                                 <ui:Target.TimeoutMS>
@@ -156,7 +157,7 @@
                               <OutArgument x:TypeArguments="x:String">[helperName]</OutArgument>
                             </ui:GetValue.Value>
                           </ui:GetValue>
-                          <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text - Cost" sap:VirtualizedContainerService.HintSize="483.2,107.2" sap2010:WorkflowViewState.IdRef="GetValue_7">
+                          <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text - Cost" sap:VirtualizedContainerService.HintSize="507.2,107.2" sap2010:WorkflowViewState.IdRef="GetValue_7">
                             <ui:GetValue.Target>
                               <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="24b852a5-2bc0-40f7-ab15-911502b09eed" InformativeScreenshot="548adf65566a5c7201fd2a7934faf62f" Selector="&lt;webctrl parentid='popover' tag='P' innertext='Cost:*' /&gt;" WaitForReady="COMPLETE">
                                 <ui:Target.TimeoutMS>
@@ -168,7 +169,7 @@
                               <OutArgument x:TypeArguments="x:String">[extractedCost]</OutArgument>
                             </ui:GetValue.Value>
                           </ui:GetValue>
-                          <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text - Production" sap:VirtualizedContainerService.HintSize="483.2,107.2" sap2010:WorkflowViewState.IdRef="GetValue_8">
+                          <ui:GetValue ContinueOnError="{x:Null}" DisplayName="Get Text - Production" sap:VirtualizedContainerService.HintSize="507.2,107.2" sap2010:WorkflowViewState.IdRef="GetValue_8">
                             <ui:GetValue.Target>
                               <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="df26f466-a008-4423-83a4-2d92fe3181b7" InformativeScreenshot="8f52d5a4460a69fd63febe1e1aacdae1" Selector="&lt;webctrl parentid='popover' tag='P' innertext='Each*produces*drops per second.' /&gt;" WaitForReady="COMPLETE">
                                 <ui:Target.TimeoutMS>
@@ -180,7 +181,7 @@
                               <OutArgument x:TypeArguments="x:String">[extractedProduction]</OutArgument>
                             </ui:GetValue.Value>
                           </ui:GetValue>
-                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke ConvertExtractedValues workflow" sap:VirtualizedContainerService.HintSize="483.2,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" Level="Trace" LogEntry="WithArguments" LogExit="WithArguments" UnSafe="False" WorkflowFileName="ConvertExtractedValues.xaml">
+                          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke ConvertExtractedValues workflow" sap:VirtualizedContainerService.HintSize="507.2,113.6" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" Level="Trace" LogEntry="WithArguments" LogExit="WithArguments" UnSafe="False" WorkflowFileName="ConvertExtractedValues.xaml">
                             <ui:InvokeWorkflowFile.Arguments>
                               <OutArgument x:TypeArguments="x:Double" x:Key="out_Production">[production]</OutArgument>
                               <OutArgument x:TypeArguments="x:Double" x:Key="out_Cost">[cost]</OutArgument>
@@ -188,30 +189,44 @@
                               <InArgument x:TypeArguments="x:String" x:Key="in_ExtractedProduction">[extractedProduction]</InArgument>
                             </ui:InvokeWorkflowFile.Arguments>
                           </ui:InvokeWorkflowFile>
-                          <If Condition="[cost/production &gt; optimumRate]" DisplayName="If cost/production rate &gt; optimumRate, change optimumRate" sap:VirtualizedContainerService.HintSize="483.2,311.2" sap2010:WorkflowViewState.IdRef="If_4">
+                          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="507.2,62.4" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[(cost/production).ToString]" />
+                          <If sap2010:Annotation.AnnotationText="We buy the helper which has the minimum rate, because that helper is going to give as more quantity of drops for a lower price" Condition="[cost/production &lt; optimumRate]" DisplayName="If cost/production rate &lt; optimumRate, change optimumRate" sap:VirtualizedContainerService.HintSize="507.2,550.4" sap2010:WorkflowViewState.IdRef="If_4">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
                             <If.Then>
-                              <ui:MultipleAssign DisplayName="Assign new optimum rate and optimum rate helper name" sap:VirtualizedContainerService.HintSize="430.4,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
-                                <ui:MultipleAssign.AssignOperations>
-                                  <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
-                                      <ui:AssignOperation.To>
-                                        <OutArgument x:TypeArguments="x:Double">[optimumRate]</OutArgument>
-                                      </ui:AssignOperation.To>
-                                      <ui:AssignOperation.Value>
-                                        <InArgument x:TypeArguments="x:Double">[cost/production]</InArgument>
-                                      </ui:AssignOperation.Value>
-                                    </ui:AssignOperation>
-                                    <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
-                                      <ui:AssignOperation.To>
-                                        <OutArgument x:TypeArguments="x:String">[optimumRateHelperName]</OutArgument>
-                                      </ui:AssignOperation.To>
-                                      <ui:AssignOperation.Value>
-                                        <InArgument x:TypeArguments="x:String">[helperName]</InArgument>
-                                      </ui:AssignOperation.Value>
-                                    </ui:AssignOperation>
-                                  </scg:List>
-                                </ui:MultipleAssign.AssignOperations>
-                              </ui:MultipleAssign>
+                              <Sequence sap:VirtualizedContainerService.HintSize="472,327.2" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:MultipleAssign DisplayName="Assign new optimum rate and optimum rate helper name" sap:VirtualizedContainerService.HintSize="430.4,132" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+                                  <ui:MultipleAssign.AssignOperations>
+                                    <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:Double">[optimumRate]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:Double">[cost/production]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                      <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                                        <ui:AssignOperation.To>
+                                          <OutArgument x:TypeArguments="x:String">[optimumRateHelperName]</OutArgument>
+                                        </ui:AssignOperation.To>
+                                        <ui:AssignOperation.Value>
+                                          <InArgument x:TypeArguments="x:String">[helperName]</InArgument>
+                                        </ui:AssignOperation.Value>
+                                      </ui:AssignOperation>
+                                    </scg:List>
+                                  </ui:MultipleAssign.AssignOperations>
+                                </ui:MultipleAssign>
+                                <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="430.4,62.4" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[optimumRate.ToString+&quot; &quot;+optimumRateHelperName]" />
+                              </Sequence>
                             </If.Then>
                             <If.Else>
                               <Sequence sap2010:WorkflowViewState.IdRef="Sequence_23">
@@ -233,7 +248,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:ForEach>
-                  <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click On Optimum Rate Helper" sap:VirtualizedContainerService.HintSize="560,107.2" sap2010:WorkflowViewState.IdRef="Click_9" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
+                  <ui:Click AlterIfDisabled="{x:Null}" DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click On Optimum Rate Helper" sap:VirtualizedContainerService.HintSize="584,107.2" sap2010:WorkflowViewState.IdRef="Click_9" KeyModifiers="None" MouseButton="BTN_LEFT" SimulateClick="True">
                     <ui:Click.CursorPosition>
                       <ui:CursorPosition Position="Center">
                         <ui:CursorPosition.OffsetX>
